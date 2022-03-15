@@ -1,0 +1,83 @@
+.cartItem
+    display: flex
+    margin: 0 0 41px 16px
+    z-index: 23
+
+    .leftPart
+        display: inherit
+        flex-direction: column
+        width: 140px
+        margin-right: 20px
+        .productOptions
+
+            margin-top: 27px
+            .detailsContainer
+                display: flex
+                flex-wrap: wrap
+
+                .detailTextItem
+                    cursor: pointer
+                    font-size: 12px
+                    margin-top: 2px
+                    margin-right: 5px
+                    border: 1px solid #1D1F22
+                    align-items: center
+                    align-content: center
+                    text-align: center
+
+                    div
+                        margin-top: 3px
+                        width: fit-content
+                        padding: 3px
+                        min-width: 23px
+                        min-height: 20px
+                .chosenText
+                    background-color: black
+                    color: white
+
+                .detailSwatchItem
+                    margin-top: 5px
+                    cursor: pointer
+                    margin-right: 2px
+                    .swatchItem
+                        border: 1px solid #1D1F22
+                        padding: 7px
+
+                    .chosenSwatch
+                        border-width: 1.2px
+
+                        padding: 10px
+
+                    .swatchName
+                        margin-top: 7px
+                        font-size: 12px
+
+                    .boldSwatchName
+                        margin-top: 7px
+                        font-size: 12px
+                        font-weight: bold
+                    &:hover
+                        opacity: 0.8
+
+    .middlePart
+        width: 24px
+        display: flex
+        flex-direction: column
+        justify-content: space-between
+        margin-right: 10px
+        align-items: center
+
+        .quantityUpdater
+            width: 24px
+            height: 24px
+            border: 1px solid #1D1F22
+            text-align: center
+            font-size: 24px
+            line-height: 24px
+            cursor: pointer
+
+    .rightPart
+        img
+            width: 105px
+            height: 100%
+            object-fit: contain

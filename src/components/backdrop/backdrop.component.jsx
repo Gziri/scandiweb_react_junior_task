@@ -1,15 +1,23 @@
-import React, { Component } from 'react';
-import './backdrop.styles.scss';
+import React, { Component } from "react";
+import "./backdrop.styles.sass";
+import { withRouter } from "../withRouter";
 
-export class Backdrop extends Component{
+import Minicart from "../minicart/minicart.component";
 
-
-
-render(){
-return(
-<div>
-Backdrop component
-</div>
-)
+class Backdrop extends Component {
+  render() {
+    let onCartPage = this.props.location.pathname === "/cart";
+    if (onCartPage) {
+      return null;
+    } else {
+      return (
+        <div className="backdrop">
+          <Minicart hideBackdrop={this.props.click} />
+          <div className="clickableArea" onClick={this.props.click} />
+        </div>
+      );
+    }
+  }
 }
-}
+
+export default withRouter(Backdrop);

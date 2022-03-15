@@ -1,0 +1,133 @@
+.container
+    margin-top: 80px
+    margin-left: 7%
+    width: 80%
+    padding-bottom: 50px
+
+    h1
+        margin-top: 120px
+
+    .cartItems
+        margin: 80px 0 80px 0
+        height: fit-content
+
+        .itemContainer
+            display: flex
+            flex-direction: row
+            justify-content: space-between
+            width: 80%
+            border-top: solid 2px #E5E5E5
+            margin-bottom: 20px
+
+            .leftPart
+                padding-top: 20px
+                .brand
+                    font-size: 30px
+                    font-weight: bold
+
+                .name
+                    font-size: 30px
+
+                .price
+                    font-size: 24px
+
+                .attributes
+                    .detailsContainer
+                        display: flex
+                .detailTextItem
+                    cursor: pointer
+                    font-size: 16px
+                    line-height: 18px
+                    margin-right: 10px
+                    border: 1px solid #1D1F22
+                    div
+                        margin: 15px
+                        margin-left: 25px
+                        margin-right: 25px
+                .chosenText
+                    background-color: black
+                    color: white
+                .detailSwatchItem
+                    cursor: pointer
+                    margin-right: 10px
+                    .swatchItem
+                        border: 1px solid #1D1F22
+                        padding: 15px
+
+                        // margin-top: 15px
+                    .chosenSwatch
+                        border-width: 1.2px
+
+                        padding: 16px
+
+                    .swatchName
+                        margin-top: 7px
+                        font-size: 12px
+                    .boldSwatchName
+                        margin-top: 7px
+                        font-size: 12px
+                        font-weight: bold
+                    &:hover
+                        opacity: 0.8
+
+            .rightPart
+                display: flex
+                flex-direction: row
+                padding-top: 20px
+
+                .counter
+                    display: flex
+                    flex-direction: column
+                    justify-content: space-between
+                    font-size: 24px
+                    margin-right: 12px
+                    align-items: center
+
+                    .quantity
+                        margin-top: 20px
+                        margin-bottom: 20px
+
+                    .changeAmount
+                        width: 45px
+                        height: 45px
+                        border: 1px solid #1D1F22
+                        text-align: center
+                        font-size: 24px
+                        line-height: 24px
+                        cursor: pointer
+                        font-size: 40px
+                        justify-content: center
+                        align-items: center
+                        line-height: 40px
+
+                .image
+                    height: 100%
+                    display: flex
+                    justify-content: center
+                    align-items: center
+                    div
+                        img
+                            width: 141px
+
+    .total
+        width: 80%
+        margin-bottom: 50px
+        padding-top: 30px
+        border-top: 1px solid #1D1F22
+
+        font-size: 36px
+        line-height: 18px
+        span
+            font-weight: bold
+
+    .checkOut
+        margin-left: 32%
+        font-size: 20px
+        font-weight: bold
+        width: 200px
+        height: 50px
+        background-color: #4CAF50
+        border: none
+        color: white
+        &:hover
+            cursor: pointer

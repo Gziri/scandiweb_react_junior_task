@@ -1,0 +1,54 @@
+.minicart
+  width: 325px
+  max-height: 540px
+  height: fit-content
+  position: fixed
+  top: 78px
+  right: 20px
+  background-color: white
+  z-index: 130
+
+  .topPart
+    display: flex
+    margin: 0 0 23px 16px
+    .name
+      font-weight: bold
+    .itemCount
+      margin-left: 10px
+
+  .noItems
+    margin-left: 16px
+    font-weight: bold
+
+  .cartItems
+    display: flex
+    flex-direction: column
+    width: 300px
+    height: 300px
+
+  .total
+    margin: 24px 10px 37px 10px
+    display: flex
+    justify-content: space-between
+    font-weight: bold
+
+  .buttons
+    margin-left: 13px
+
+    *:hover
+      cursor: pointer
+
+    .bothButtons
+      width: 140px
+      height: 43px
+      margin-bottom: 20px
+    .viewBag
+
+      color: black
+      border: 1px solid #1D1F22
+
+  .checkOut
+    margin-left: 12px
+    background-color: #4CAF50
+    border: none
+    color: white

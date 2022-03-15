@@ -1,0 +1,107 @@
+.descriptionContainer
+    margin-top: 50px
+    display: flex
+    padding: 50px 50px 0 50px
+
+    .productAdditionalPictures
+        display: flex
+        flex-direction: column
+        width: 120px
+        height: 550px
+        cursor: pointer
+        .scrollbar
+            div
+                img
+                    margin-bottom: 10px
+                    width: 110px !important
+                    object-fit: contain
+
+    .productMainPicture
+        padding: 10px
+        margin-left: 20px
+        width: 600px
+        height: 550px
+        display: flex
+        align-content: center
+        justify-content: center
+        img
+            object-fit: contain
+            width: 500px
+            heighth: 400px
+
+    .productDetails
+        margin-left: 100px
+        margin-top: 10px
+        .brandName
+            font-weight: bold
+            font-size: 30px
+
+        .productName
+            margin-top: 15px
+            font-size: 30px
+
+        .productOptions
+            margin-top: 40px
+            .detailsContainer
+                display: flex
+                .detailTextItem
+                    cursor: pointer
+                    font-size: 16px
+                    line-height: 18px
+                    margin-right: 10px
+                    border: 1px solid #1D1F22
+                    div
+                        margin: 15px
+                        margin-left: 25px
+                        margin-right: 25px
+                .chosenText
+                    background-color: black
+                    color: white
+                .detailSwatchItem
+                    cursor: pointer
+                    margin-right: 10px
+                    .swatchItem
+                        border: 1px solid #1D1F22
+                        padding: 15px
+
+                    .chosenSwatch
+                        border-width: 1.2px
+
+                        padding: 16px
+
+                    .swatchName
+                        margin-top: 7px
+                        font-size: 12px
+                    .boldSwatchName
+                        margin-top: 7px
+                        font-size: 12px
+                        font-weight: bold
+                    &:hover
+                        opacity: 0.8
+
+        .productPrice
+            margin-top: 10px
+            font-size: 24px
+            font-weight: bold
+            p
+                font-size: 18px
+
+        .addToCartButton
+            margin-top: 40px
+            button
+                width: 300px
+                height: 50px
+                background-color: #5ece7b
+                color: white
+                border: none
+                cursor: pointer
+            .disabled
+                background-color: grey
+                cursor: not-allowed
+
+        .productDescription
+            margin-top: 20px
+            width: 400px
+            height: 120px
+            margin-bottom: 20px
+            overflow-y: auto
