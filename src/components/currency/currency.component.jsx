@@ -22,8 +22,8 @@ class Currency extends Component {
       .map(
         (c) =>
           {const obj = {
-            value: c.currency.label,
-            label: c.currency.symbol + c.currency.label,
+            value: c.label,
+            label: c.symbol + c.label,
           }
           return obj }
       )
@@ -45,7 +45,7 @@ class Currency extends Component {
             menu: (provided, state) => ({
               ...provided,
               border: "none",
-              boxShadow: "none",
+              boxShadow: "0px 5px 20px 5px rgba(29, 31, 34, .2)" ,
               textAlign: "center",
             }),
           }}

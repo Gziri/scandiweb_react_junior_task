@@ -9,11 +9,10 @@ import { Routes, Route } from "react-router-dom";
 
 class App extends React.Component {
   render() {
-    const data = this.props?.data;
 
     return (
       <div className="App">
-        <Header categories={data?.categories} currencies={data?.categories} />
+        <Header  />
         <Routes>
           <Route exact path="/" element={<Plp />} />
           <Route path="/pdp" element={<Pdp />} />

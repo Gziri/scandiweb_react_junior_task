@@ -21,35 +21,11 @@ const client = new ApolloClient({
 });
 
 
-const FIRST_QUERY = gql`
-  query GetCategories{
-    categories {
-      name
-      products {
-        prices {
-          currency {
-            label
-            symbol
-          }
-        }
-      }
-    }
-  }
-`;
-
-function AppComponentApolloWrapper() {
-  const { loading, error, data } = useQuery(FIRST_QUERY);
-
-  if (loading) return "Loading...";
-  if (error) return error;
-  return <App data={data} />;
-}
-
 ReactDOM.render(
   <BrowserRouter>
     <ApolloProvider client={client}>
       <Provider store={store}>
-        <AppComponentApolloWrapper />
+        <App />
       </Provider>
     </ApolloProvider>
   </BrowserRouter>,

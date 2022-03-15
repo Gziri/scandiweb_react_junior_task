@@ -10,6 +10,7 @@ import "./cart.styles.sass";
 import Carousel from "../../components/carousel/carousel.component";
 
 import _ from "underscore";
+import { selectCurrency } from "../../redux/currency-picker/currency.selectors";
 
 class Cart extends Component {
   constructor(props) {
@@ -128,8 +129,8 @@ class Cart extends Component {
   productOptions = (item) => {
     return item.attributes.map((a) => {
       return (
-        <div key={a.id + "Option"} className="">
-          <p style={{ fontWeight: "bold" }}>{a.name.toUpperCase()}:</p>
+        <div key={a.id + "Option"}>
+          <p className="optionName">{a.name.toUpperCase()}:</p>
           <div className="detailsContainer">
             {a.type === "text"
               ? this.textAttributeHandler(a, item.chosenAttributes, item.id)
@@ -140,13 +141,24 @@ class Cart extends Component {
     });
   };
 
+  priceFilterHandler = (curr, product) => {
+    let displayPrice = product.prices.filter(
+      (c) => c.currency.label === curr.selectedCurrency.value
+    );
+
+    return displayPrice[0].currency.symbol + " " + displayPrice[0].amount;
+  };
+
   render() {
     const cartItems = (item) => (
       <div key={item.key + "" + Math.random(0, 1)} className="itemContainer">
         <div className="leftPart">
           <div className="brand">{item.brand}</div>
           <div className="name">{item.name}</div>
-          <div className="price">{item.prices[0].amount}</div>
+          <div className="price">
+            {" "}
+            {this.priceFilterHandler(this.props.currency, item)}
+          </div>
           <div className="attributes">
             {item.attributes ? this.productOptions(item) : null}
           </div>
@@ -169,14 +181,7 @@ class Cart extends Component {
           </div>
 
           <div className="image">
-            <div
-              style={{
-                maxWidth: 141,
-                marginLeft: "auto",
-                marginRight: "auto",
-                marginTop: 64,
-              }}
-            >
+            <div className="carouselWrapper">
               <Carousel>
                 {item.gallery.map((image) => (
                   <img src={image} alt="" key={image} />
@@ -209,6 +214,7 @@ const mapStateToProps = (state) => ({
   cart: selectCartItems(state),
   total: selectCartTotal(state),
   itemCount: selectCartItemsCount(state),
+  currency: selectCurrency(state),
 });
 
 const mapDispatchToProps = (dispatch) => ({

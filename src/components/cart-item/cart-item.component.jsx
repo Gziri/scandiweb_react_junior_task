@@ -36,25 +36,23 @@ class CartItem extends Component {
   };
 
   textAttributeHandler = (a, chosenAttributes) => {
-    return a?.name === "Size" || a?.name === "Capacity"
-      ? a.items.map((i) => (
-          <div
-            key={i.id}
-            className={`detailTextItem ${
-              this.state.product.chosenAttributes
-                ? this.state.product.chosenAttributes[a.name] === i.value
-                  ? "chosenText"
-                  : ""
-                : ""
-            }`}
-            onClick={() =>
-              this.updateAttributesHandler(a, i.value, chosenAttributes)
-            }
-          >
-            <div>{i.displayValue}</div>
-          </div>
-        ))
-      : null;
+    return a.items.map((i) => (
+      <div
+        key={i.id}
+        className={`detailTextItem ${
+          this.state.product.chosenAttributes
+            ? this.state.product.chosenAttributes[a.name] === i.value
+              ? "chosenText"
+              : ""
+            : ""
+        }`}
+        onClick={() =>
+          this.updateAttributesHandler(a, i.value, chosenAttributes)
+        }
+      >
+        <div>{i.displayValue}</div>
+      </div>
+    ));
   };
 
   switchAttributeHandler = (a, chosenAttributes) => {

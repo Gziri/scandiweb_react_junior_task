@@ -52,6 +52,8 @@ class Plp extends Component {
     const describe = (product) => {
       this.props.pushDescription(product);
     };
+    
+    
 
     function ProductListingPage(cat) {
       const categoryName = cat === undefined ? "all" : cat.cat;
@@ -64,10 +66,10 @@ class Plp extends Component {
         return "Error";
       }
       return (
-        <div className="">
-          <h2 style={{ paddingLeft: "60px" }}>{categoryName}</h2>
+        <div className="productListPageContainer">
+          <h2 className="productListHeader" >{categoryName.charAt(0).toUpperCase() + categoryName.slice(1)}</h2>
           <div className="productListPage">
-            {data.category.products.map((i) => (
+            {data?.category.products.map((i) => (
               <Categoryitem info={i} click={() => describe(i)} key={i.id} />
             ))}
           </div>
@@ -75,7 +77,7 @@ class Plp extends Component {
       );
     }
 
-    return <ProductListingPage cat={this.props.category} />;
+    return <ProductListingPage cat={this.props.category.toLowerCase()} />;
   }
 }
 

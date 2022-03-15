@@ -9,6 +9,9 @@ import { Scrollbars } from "react-custom-scrollbars";
 import { addItem } from "../../redux/cart/cart.actions";
 import { selectCurrency } from "../../redux/currency-picker/currency.selectors";
 
+import parser from "html-react-parser";
+import { parse } from "graphql";
+
 class Pdp extends Component {
   constructor(props) {
     super(props);
@@ -79,7 +82,7 @@ class Pdp extends Component {
     return attributes.map((a) => {
       return (
         <div key={a.id} className="">
-          <p style={{ fontWeight: "bold" }}>{a.name.toUpperCase()}:</p>
+          <p className="attributeName">{a.name.toUpperCase()}:</p>
           <div className="detailsContainer">
             {a.type === "text"
               ? this.textAttributeHandler(a)
@@ -111,12 +114,7 @@ class Pdp extends Component {
     return (
       <div className="descriptionContainer">
         <div className="productAdditionalPictures">
-          <Scrollbars
-            className="scrollbar"
-            autoHide
-            autoHideTimeout={1000}
-            style={{ width: "100%", height: "100%" }}
-          >
+          <Scrollbars className="scrollbar" autoHide autoHideTimeout={1000}>
             {product.gallery.map((i) => (
               <img
                 key={i}
@@ -151,10 +149,16 @@ class Pdp extends Component {
               ADD TO CART
             </button>
           </div>
-          <div
-            className="productDescription"
-            dangerouslySetInnerHTML={{ __html: product.description }}
-          />
+        <div
+          className={`${
+            product.description.length < 100
+              ? "productDescription"
+              : "productLongDescription"
+          }`}
+        >
+          
+          {parser(product.description)}
+        </div>
         </div>
       </div>
     );

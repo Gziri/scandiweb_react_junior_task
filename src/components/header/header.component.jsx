@@ -34,11 +34,19 @@ class Header extends Component {
     this.props.changeCategory(cat);
   };
   render() {
-    const categoriesList = [...this.props.categories];
+    const categoriesList = ["All","Tech","Clothes"];
     if (this.state.activeCategory === "") {
       this.setState({ activeCategory: categoriesList[0] });
     }
-    const currencies = [...this.props.currencies[0]?.products[0].prices];
+    const currencies = [
+      { label: "USD", symbol: "$" },
+      { label: "GBP", symbol: "£" },
+      { label: "AUD", symbol: "A$" },
+      { label: "JPY", symbol: "¥" },
+      { label: "RUB", symbol: "₽" },
+    ];
+
+    
 
     return (
       <div className="header">
@@ -48,12 +56,12 @@ class Header extends Component {
               <Link
                 to={"/"}
                 className={`${
-                  c.name === this.state.activeCategory ? "activeCategory" : null
+                  c === this.state.activeCategory ? "activeCategory" : null
                 } categoryElement`}
-                key={c.name}
-                onClick={() => this.categoryClickHandler(c.name)}
+                key={c}
+                onClick={() => this.categoryClickHandler(c)}
               >
-                <span> {c.name.charAt(0).toUpperCase() + c.name.slice(1)}</span>
+                <span> {c}</span>
               </Link>
             ))}
         </div>

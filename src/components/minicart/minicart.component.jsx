@@ -21,7 +21,6 @@ class Minicart extends Component {
             className="scrollbar"
             autoHide
             autoHideTimeout={1000}
-            style={{ width: "100%", height: "100%" }}
           >
             {cartItems.map((item) => {
               return (

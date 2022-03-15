@@ -19,7 +19,7 @@ class Categoryitem extends Component {
     let info = this.props.info;
     return (
       <div className="categoryItemContainer">
-        <Link style={{ textDecoration: "none", color: "#1D1F22" }} to={"pdp"}>
+        <Link to={"pdp"} className="link">
           <div className="categoryItemPicture">
             {info.inStock ? null : (
               <div className="outOfStock">
@@ -33,6 +33,7 @@ class Categoryitem extends Component {
               info.inStock ? null : "outOfStockAdditional"
             } categoryItemDetails`}
           >
+            <div className="categoryBrand">{info.brand}</div>
             <div className="categoryItemName">{info.name}</div>
             <div className="categoryItemPrice">
               {this.priceFilterHandler(this.props.currency, info)}
