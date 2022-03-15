@@ -1,6 +1,11 @@
 {
   "name": "scandiweb_react_junior_task",
   "version": "0.1.0",
+  "author": {
+    "name": "Gela Gzirishvili",
+    "email": "gelagzirishvili@gmail.com",
+    "url": "https://github.com/Gziri/scandiweb_react_junior_task"
+  },
   "private": true,
   "dependencies": {
     "@apollo/client": "^3.5.8",
