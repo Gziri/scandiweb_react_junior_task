@@ -26,22 +26,11 @@ class Cart extends Component {
     previousStateChosenAttributes,
     localItem
   ) => {
-    let stateItem = this.state.products.find((x) => _.isEqual(x, localItem));
+    let stateItem = this.props.cart.find((x) =>
+      _.isEqual(x.chosenAttributes, previousStateChosenAttributes)
+    );
     let attr = { ...stateItem.chosenAttributes, [type.name]: value };
-    let filteredState = [
-      ...this.state.products.filter(
-        (x) =>
-          x.id !== stateItem.id &&
-          x.chosenAttributes !== stateItem.chosenAttributes
-      ),
-    ];
-    this.setState({
-      ...this.state,
-      products: [
-        ...filteredState,
-        { ...stateItem, chosenAttributes: { ...attr } },
-      ],
-    });
+
     this.props.updateItem({
       ...stateItem,
       chosenAttributes: { ...attr },
@@ -50,57 +39,39 @@ class Cart extends Component {
   };
 
   textAttributeHandler = (a, chosenAttributes, id) => {
-    return a?.name !== "color"
-      ? a.items.map((i) => {
-          let stateFull = this.state.products.length > 0;
-          let localItem = stateFull
-            ? this.state.products?.find(
-                (item) =>
-                  item.id === id &&
-                  item.chosenAttributes[a.name] === chosenAttributes[a.name]
-              )
-            : false;
-          return (
-            <div
-              key={i.id + "Key"}
-              className={`detailTextItem ${
-                localItem.chosenAttributes
-                  ? localItem.chosenAttributes[a.name] === i.value
-                    ? "chosenText"
-                    : ""
-                  : ""
-              }`}
-              onClick={() =>
-                this.updateAttributesHandler(
-                  a,
-                  i.value,
-                  chosenAttributes,
-                  localItem
-                )
-              }
-            >
-              <div>{i.displayValue}</div>
-            </div>
-          );
-        })
-      : null;
+    return a.items.map((i) => {
+
+ 
+
+
+      return (
+        <div
+          key={i.id + "Key"}
+          className={`detailTextItem ${
+            chosenAttributes[a.name] === i.value ? "chosenText" : ""
+          }`}
+          onClick={() =>
+            this.updateAttributesHandler(
+              a,
+              i.value,
+              chosenAttributes
+            )
+          }
+        >
+          <div>{i.displayValue}</div>
+        </div>
+      );
+    });
   };
 
   switchAttributeHandler = (a, chosenAttributes, id) => {
-    let stateFull = this.state.products.length > 0;
-    let localItem = stateFull
-      ? this.state.products?.find(
-          (item) =>
-            item.id === id && _.isEqual(item.chosenAttributes, chosenAttributes)
-        )
-      : {};
+    
 
     return a.items.map((i) => {
       const color =
         i.value === "#000000" || i.value === "#030BFF" ? "white" : "black";
-      const isChosen = localItem.chosenAttributes
-        ? localItem.chosenAttributes[a.name] === i.value
-        : false;
+      const isChosen = chosenAttributes[a.name] === i.value;
+
       return (
         <div className="detailSwatchItem" key={i.id + "Swatch"}>
           <div
@@ -109,8 +80,7 @@ class Cart extends Component {
               this.updateAttributesHandler(
                 a,
                 i.value,
-                chosenAttributes,
-                localItem
+                chosenAttributes
               )
             }
             style={{
@@ -156,7 +126,6 @@ class Cart extends Component {
           <div className="brand">{item.brand}</div>
           <div className="name">{item.name}</div>
           <div className="price">
-            {" "}
             {this.priceFilterHandler(this.props.currency, item)}
           </div>
           <div className="attributes">

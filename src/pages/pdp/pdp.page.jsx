@@ -3,21 +3,22 @@ import "./pdp.styles.sass";
 
 import { connect } from "react-redux";
 import { createStructuredSelector } from "reselect";
-import { selectProductDescription } from "../../redux/product-description/pd.selectors";
+import { selectProductID } from "../../redux/product-description/pd.selectors";
 
 import { Scrollbars } from "react-custom-scrollbars";
 import { addItem } from "../../redux/cart/cart.actions";
 import { selectCurrency } from "../../redux/currency-picker/currency.selectors";
 
 import parser from "html-react-parser";
-import { parse } from "graphql";
+
+import { graphWrapper } from "../../components/HOC/graphWrapper";
 
 class Pdp extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      image: props.desc.gallery[0],
-      product: { ...props.desc, chosenAttributes: {} },
+      image: this.props.product.gallery[0],
+      product: { ...this.props.product, chosenAttributes: {} },
     };
   }
 
@@ -46,8 +47,10 @@ class Pdp extends Component {
       <div
         key={i.id}
         className={`detailTextItem ${
-          this.state.product.chosenAttributes[a.name] === i.value
-            ? "chosenText"
+          this.state.product.chosenAttributes
+            ? this.state.product.chosenAttributes[a.name] === i.value
+              ? "chosenText"
+              : ""
             : ""
         }`}
         onClick={() => this.updateAttributesHandler(a.name, i.value)}
@@ -102,6 +105,7 @@ class Pdp extends Component {
   };
 
   addItemToCartHandler = (product, localProduct) => {
+  
     product.attributes.length ===
     Object.keys(localProduct.chosenAttributes).length
       ? this.props.addItem(localProduct)
@@ -109,7 +113,7 @@ class Pdp extends Component {
   };
 
   render() {
-    const product = this.props.desc;
+    const product = this.props.product;
 
     return (
       <div className="descriptionContainer">
@@ -149,16 +153,15 @@ class Pdp extends Component {
               ADD TO CART
             </button>
           </div>
-        <div
-          className={`${
-            product.description.length < 100
-              ? "productDescription"
-              : "productLongDescription"
-          }`}
-        >
-          
-          {parser(product.description)}
-        </div>
+          <div
+            className={`${
+              product.description.length < 100
+                ? "productDescription"
+                : "productLongDescription"
+            }`}
+          >
+            {parser(product.description)}
+          </div>
         </div>
       </div>
     );
@@ -166,7 +169,7 @@ class Pdp extends Component {
 }
 
 const mapStateToProps = createStructuredSelector({
-  desc: selectProductDescription,
+  desc: selectProductID,
   currency: selectCurrency,
 });
 
@@ -174,4 +177,4 @@ const mapDispatchToProps = (dispatch) => ({
   addItem: (item) => dispatch(addItem(item)),
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(Pdp);
+export default connect(mapStateToProps, mapDispatchToProps)(graphWrapper(Pdp));

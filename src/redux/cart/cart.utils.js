@@ -87,17 +87,6 @@ export const removeItemFromCart = (cartItems, cartItemToRemove) => {
 
 export const editItemOnCart = (cartItems, itemToChange) => {
   const updatedCartItems = cartItems.map((item) => {
-    // if (
-    //   _.isEqual(
-    //     item.chosenAttributes,
-    //     itemToChange.previousStateChosenAttributes
-    //   )
-    // ) {
-    //   delete itemToChange.previousStateChosenAttributes;
-    //   return itemToChange;
-    // } else {
-    //   return item;
-    // }
 
     if (
       _.isEqual(

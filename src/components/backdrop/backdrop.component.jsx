@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import "./backdrop.styles.sass";
-import { withRouter } from "../withRouter";
+import { withRouter } from "../HOC/withRouter";
 
 import Minicart from "../minicart/minicart.component";
 

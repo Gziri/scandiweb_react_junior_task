@@ -2,7 +2,7 @@ import { createSelector } from "reselect";
 
 const selectPd = (state) => state.productToDescribe;
 
-export const selectProductDescription = createSelector(
+export const selectProductID = createSelector(
   [selectPd],
-  (pd) => pd.productToDescribe
+  (pd) => pd.productID
 );

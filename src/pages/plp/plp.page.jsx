@@ -8,6 +8,12 @@ import { pushDescription } from "../../redux/product-description/pd.actions";
 import { selectCategory } from "../../redux/category/category.selectors";
 
 class Plp extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      categories: [],
+    };
+  }
   componentDidMount() {
     window.scrollTo({
       top: 0,
@@ -20,6 +26,7 @@ class Plp extends Component {
     const CATEGORY_ITEMS_QUERY = gql`
       query GetCategoryItems($categoryName: String!) {
         category(input: { title: $categoryName }) {
+          name
           products {
             id
             name
@@ -49,35 +56,57 @@ class Plp extends Component {
       }
     `;
 
-    const describe = (product) => {
-      this.props.pushDescription(product);
+    const describe = (productID) => {
+      this.props.pushDescription(productID);
     };
-    
-    
 
-    function ProductListingPage(cat) {
-      const categoryName = cat === undefined ? "all" : cat.cat;
-      const { loading, error, data } = useQuery(CATEGORY_ITEMS_QUERY, {
-        variables: { categoryName: categoryName },
+    function QueryCategories(q, c) {
+      const { data } = useQuery(q, {
+        variables: { categoryName: c },
       });
 
-      if (loading) return "Loading...";
-      if (error) {
-        return "Error";
-      }
-      return (
-        <div className="productListPageContainer">
-          <h2 className="productListHeader" >{categoryName.charAt(0).toUpperCase() + categoryName.slice(1)}</h2>
-          <div className="productListPage">
-            {data?.category.products.map((i) => (
-              <Categoryitem info={i} click={() => describe(i)} key={i.id} />
-            ))}
-          </div>
-        </div>
-      );
+      return data;
     }
 
-    return <ProductListingPage cat={this.props.category.toLowerCase()} />;
+    function ProductListingPage(cat) {
+      const categoryNames = ["tech","clothes"];
+      const categories = categoryNames.map((cat) =>
+        QueryCategories(CATEGORY_ITEMS_QUERY, cat)
+      );
+
+      if (categories.indexOf(undefined) > -1) {
+        return <div>"Loading..."</div>;
+      }
+
+      const plpContent = categories.map((category) => {
+        const categoryItem = category.category;
+        if (cat.cat !== "all" && category.category.name !== cat.cat) {
+          return <div key={Math.random(0,1)} />;
+        }
+
+        return (
+          <div className="productListPageContainer" key={category.category.name+Math.random(0,1)}>
+            <h2 className="productListHeader">
+              {categoryItem.name.charAt(0).toUpperCase() +
+                categoryItem.name.slice(1)}
+            </h2>
+            <div className="productListPage">
+              {categoryItem.products.map((i) => (
+                <Categoryitem
+                  info={i}
+                  click={() => describe(i.id)}
+                  key={i.id}
+                />
+              ))}
+            </div>
+          </div>
+        );
+      });
+
+      return [...plpContent];
+    }
+
+    return <ProductListingPage cat={this.props.category} />;
   }
 }
 

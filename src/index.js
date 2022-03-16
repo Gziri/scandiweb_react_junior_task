@@ -6,8 +6,6 @@ import {
   ApolloProvider,
   ApolloClient,
   InMemoryCache,
-  useQuery,
-  gql,
 } from "@apollo/client";
 
 import { Provider } from "react-redux";

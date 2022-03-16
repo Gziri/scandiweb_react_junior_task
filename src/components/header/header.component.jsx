@@ -19,7 +19,8 @@ import Backdrop from "../backdrop/backdrop.component";
 import { CartIcon, ShopIcon } from "../icons/icon.component";
 import { changeCategory } from "../../redux/category/categoty.actions";
 
-import { withRouter } from "../withRouter";
+import { withRouter } from "../HOC/withRouter";
+import { selectCategory } from "../../redux/category/category.selectors";
 
 class Header extends Component {
   constructor(props) {
@@ -34,7 +35,7 @@ class Header extends Component {
     this.props.changeCategory(cat);
   };
   render() {
-    const categoriesList = ["All","Tech","Clothes"];
+    const categoriesList = ["all","tech","clothes"];
     if (this.state.activeCategory === "") {
       this.setState({ activeCategory: categoriesList[0] });
     }
@@ -46,7 +47,6 @@ class Header extends Component {
       { label: "RUB", symbol: "₽" },
     ];
 
-    
 
     return (
       <div className="header">
@@ -61,7 +61,8 @@ class Header extends Component {
                 key={c}
                 onClick={() => this.categoryClickHandler(c)}
               >
-                <span> {c}</span>
+                <span> {c.charAt(0).toUpperCase() +
+                c.slice(1)}</span>
               </Link>
             ))}
         </div>
@@ -105,6 +106,7 @@ const mapDistpatchToProps = (dispatch) => ({
 const mapStateToProps = (state) => ({
   hidden: selectCartHidden(state),
   quantity: selectCartItemsCount(state),
+  category: selectCategory(state)
 });
 
 export default connect(

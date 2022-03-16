@@ -17,11 +17,7 @@ class Minicart extends Component {
     const mapCartItems = (cartItems) => {
       return (
         <div className="cartItems">
-          <Scrollbars
-            className="scrollbar"
-            autoHide
-            autoHideTimeout={1000}
-          >
+          <Scrollbars className="scrollbar" autoHide autoHideTimeout={1000}>
             {cartItems.map((item) => {
               return (
                 <div key={item.id + Math.random()}>
